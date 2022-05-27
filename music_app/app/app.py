@@ -12,8 +12,13 @@ class App(Tk):
 
     def create_gui(self):
         
-        self.label_top = Label(text='Label top', justify='center')
-        self.label_top.grid(columnspan=5, row=1)
+        menubar = Menu(self)
+        self.config(menu=menubar)
+        fileMenu = Menu(menubar)
+        list_file_Menu = ['New playlist', 'Open playlist', 'Save', 'Save As' ,'Exit']
+        for filemenu in list_file_Menu:
+            fileMenu.add_command(label=filemenu)    
+        menubar.add_cascade(label='File', menu=fileMenu)
 
         self.image = Image.open('D:/программирование/Tkinter/music_app/image/label_music_image_256.png')
         self.image_bk = ImageTk.PhotoImage(self.image)
@@ -22,4 +27,4 @@ class App(Tk):
 
         self.label_bottom = Label(text='Bottom label')
         self.label_bottom.grid(columnspan=5, row=3)
-        
+    
