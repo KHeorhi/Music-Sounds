@@ -14,11 +14,16 @@ class App(Tk):
         
         menubar = Menu(self)
         self.config(menu=menubar)
-        fileMenu = Menu(menubar)
+        list_menubar = ['File', 'View']
         list_file_Menu = ['New playlist', 'Open playlist', 'Save', 'Save As' ,'Exit']
-        for filemenu in list_file_Menu:
-            fileMenu.add_command(label=filemenu)    
-        menubar.add_cascade(label='File', menu=fileMenu)
+        for item_list_menubar in list_menubar: 
+            if item_list_menubar == 'File':
+                fileMenu = Menu(menubar)
+                for item_list_file_Menu in list_file_Menu:
+                    fileMenu.add_command(label=item_list_file_Menu)   
+                menubar.add_cascade(label=item_list_menubar, menu=fileMenu)
+            else:
+                menubar.add_cascade(label=item_list_menubar)
 
         self.image = Image.open('image/label_music_image_256.png')
         self.image_bk = ImageTk.PhotoImage(self.image)
