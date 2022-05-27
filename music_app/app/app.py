@@ -1,6 +1,7 @@
 from tkinter import * 
 from PIL import Image, ImageTk
 
+
 class App(Tk):
 
     def __init__(self, name_title, path_iconbitmap, size_geometry, *args, **kwargs):
@@ -12,6 +13,7 @@ class App(Tk):
 
     def create_gui(self):
         
+        #create menubar
         menubar = Menu(self)
         self.config(menu=menubar)
         list_menubar = ['File', 'View']
@@ -25,11 +27,36 @@ class App(Tk):
             else:
                 menubar.add_cascade(label=item_list_menubar)
 
+        #create Frame
+        self.frame_top = Frame()
+        self.frame_top.pack()
+        self.frame_bottom = Frame()
+        self.frame_bottom.pack()
+        
+        #download picture
         self.image = Image.open('image/label_music_image_256.png')
         self.image_bk = ImageTk.PhotoImage(self.image)
-        self.label_middel = Label(image=self.image_bk)
+        
+        #add picture to top Frame
+        self.label_middel = Label(self.frame_top, image=self.image_bk)
         self.label_middel.grid(columnspan=5, row=2)
 
-        self.label_bottom = Label(text='Bottom label')
-        self.label_bottom.grid(columnspan=5, row=3)
+        #add buttons to bottom Frame
+
+        self.volume_button =  Button(self.frame_bottom, text='Volumes')
+        self.play_button = Button(self.frame_bottom, text='Play')
+        self.stop_button = Button(self.frame_bottom, text='Stop')
+
+        self.volume_button.grid(column=1, row=2)
+        self.play_button.grid(column=2, row=2)
+        self.stop_button.grid(column=3, row=2)
+
+        #create music_road and add to bottom Frame
+        
+        self.music_canvas = Canvas(self.frame_bottom, width=290, height=11, bg='aquamarine')
+        self.music_canvas.grid(columnspan=5, row=1)
+        self.track_road = self.music_canvas.create_rectangle(1, 1, 290, 9)
+        self.music_speeder = self.music_canvas.create_rectangle(0, 0, 10, 11, width=1)
     
+    def create_button(self):
+        pass
