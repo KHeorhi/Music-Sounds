@@ -20,7 +20,7 @@ class App(Tk):
             fileMenu.add_command(label=filemenu)    
         menubar.add_cascade(label='File', menu=fileMenu)
 
-        self.image = Image.open('D:/программирование/Tkinter/music_app/image/label_music_image_256.png')
+        self.image = Image.open('image/label_music_image_256.png')
         self.image_bk = ImageTk.PhotoImage(self.image)
         self.label_middel = Label(image=self.image_bk)
         self.label_middel.grid(columnspan=5, row=2)
