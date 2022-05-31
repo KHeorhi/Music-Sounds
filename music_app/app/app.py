@@ -55,8 +55,9 @@ class App(Tk):
         
         self.music_canvas = Canvas(self.frame_bottom, width=290, height=11, bg='aquamarine')
         self.music_canvas.grid(columnspan=5, row=1)
-        self.track_road = self.music_canvas.create_rectangle(1, 1, 290, 9)
-        self.music_speeder = self.music_canvas.create_rectangle(0, 0, 10, 11, width=1)
+        self.track_road = self.music_canvas.create_rectangle(2, 5, 150, 5, outline='green')
+        self.track_road = self.music_canvas.create_rectangle(150, 5, 290, 5, outline='red')
+        self.music_speeder = self.music_canvas.create_rectangle(4, 4, 10, 11, width=1, fill='orangered', outline='black')
     
     def create_button(self):
         pass
