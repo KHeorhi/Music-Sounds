@@ -54,11 +54,12 @@ class App(Tk):
 
         #create volume_road and add to bottom Frame
 
-        self.volume_canvas = Canvas(self.frame_bottom, width=100, height=20)
+        self.volume_canvas = Canvas(self.frame_bottom, width=101, height=20)
         self.volume_canvas.grid(column=4, row=2)
-        self.volume_road_behind = self.volume_canvas.create_rectangle(2, 10, 2, 10, outline='green')
-        self.volume_road_before = self.volume_canvas.create_rectangle(2, 10, 100, 10, outline='red')
-        self.volume_speedeer = self.volume_canvas.create_oval(2, 6.5, 9, 13.5, fill='green')
+        self.volume_road_behind = self.volume_canvas.create_rectangle(0, 10, 2, 10, outline='green')
+        self.volume_road_before = self.volume_canvas.create_rectangle(0, 10, 100, 10, outline='red')
+        self.volume_speedeer = self.volume_canvas.create_oval(2, 6.5, 9, 13.5, fill='orangered')
+        self.volume_canvas.bind('<Button-1>', self.speeder_move)
 
         #create music_road and add to bottom Frame
         
@@ -70,3 +71,10 @@ class App(Tk):
     
     def create_button(self):
         pass
+
+
+    def speeder_move(self, event):
+        coord_list = self.volume_canvas.coords(self.volume_speedeer)
+        if (coord_list[0] + coord_list[0]) / 2 <=100:
+            self.volume_canvas.coords(self.volume_speedeer, event.x-3.5, 6.5, event.x+3.5, 13.5)
+            print(self.volume_canvas.coords(self.volume_speedeer))
