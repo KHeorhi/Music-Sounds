@@ -46,7 +46,7 @@ class App(Tk):
 
         #self.volume_button =  Button(self.frame_bottom, text='Volumes')
         self.play_button = Button(self.frame_bottom, text='Play', command=sounds.play_sound)
-        self.stop_button = Button(self.frame_bottom, text='Stop')
+        self.stop_button = Button(self.frame_bottom, text='Stop', command=sounds.stop_sound)
 
         #self.volume_button.grid(column=1, row=2)
         self.play_button.grid(column=1, row=2)
@@ -56,15 +56,16 @@ class App(Tk):
 
         self.volume_canvas = Canvas(self.frame_bottom, width=100, height=20)
         self.volume_canvas.grid(column=4, row=2)
-        self.volume_road = self.volume_canvas.create_rectangle(2, 10, 100, 10, outline='red')
+        self.volume_road_behind = self.volume_canvas.create_rectangle(2, 10, 2, 10, outline='green')
+        self.volume_road_before = self.volume_canvas.create_rectangle(2, 10, 100, 10, outline='red')
         self.volume_speedeer = self.volume_canvas.create_oval(2, 6.5, 9, 13.5, fill='green')
 
         #create music_road and add to bottom Frame
         
         self.music_canvas = Canvas(self.frame_bottom, width=290, height=11)
         self.music_canvas.grid(columnspan=5, row=1)
-        self.track_road = self.music_canvas.create_rectangle(2, 7, 2, 7, outline='green')
-        self.track_road = self.music_canvas.create_rectangle(2, 7, 290, 7, outline='red')
+        self.track_road_behind = self.music_canvas.create_rectangle(4, 7, 4, 7, outline='green')
+        self.track_road_before = self.music_canvas.create_rectangle(4, 7, 290, 7, outline='red')
         self.music_speeder = self.music_canvas.create_rectangle(4, 4, 10, 11, width=1, fill='orangered', outline='black')
     
     def create_button(self):
