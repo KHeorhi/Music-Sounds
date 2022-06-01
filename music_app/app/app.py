@@ -1,5 +1,6 @@
 from tkinter import * 
 from PIL import Image, ImageTk
+from audio import sounds
 
 
 class App(Tk):
@@ -43,20 +44,27 @@ class App(Tk):
 
         #add buttons to bottom Frame
 
-        self.volume_button =  Button(self.frame_bottom, text='Volumes')
-        self.play_button = Button(self.frame_bottom, text='Play')
+        #self.volume_button =  Button(self.frame_bottom, text='Volumes')
+        self.play_button = Button(self.frame_bottom, text='Play', command=sounds.play_sound)
         self.stop_button = Button(self.frame_bottom, text='Stop')
 
-        self.volume_button.grid(column=1, row=2)
-        self.play_button.grid(column=2, row=2)
-        self.stop_button.grid(column=3, row=2)
+        #self.volume_button.grid(column=1, row=2)
+        self.play_button.grid(column=1, row=2)
+        self.stop_button.grid(column=2, row=2)
+
+        #create volume_road and add to bottom Frame
+
+        self.volume_canvas = Canvas(self.frame_bottom, width=100, height=20)
+        self.volume_canvas.grid(column=4, row=2)
+        self.volume_road = self.volume_canvas.create_rectangle(2, 10, 100, 10, outline='red')
+        self.volume_speedeer = self.volume_canvas.create_oval(2, 6.5, 9, 13.5, fill='green')
 
         #create music_road and add to bottom Frame
         
-        self.music_canvas = Canvas(self.frame_bottom, width=290, height=11, bg='aquamarine')
+        self.music_canvas = Canvas(self.frame_bottom, width=290, height=11)
         self.music_canvas.grid(columnspan=5, row=1)
-        self.track_road = self.music_canvas.create_rectangle(2, 7, 150, 7, outline='green')
-        self.track_road = self.music_canvas.create_rectangle(150, 7, 290, 7, outline='red')
+        self.track_road = self.music_canvas.create_rectangle(2, 7, 2, 7, outline='green')
+        self.track_road = self.music_canvas.create_rectangle(2, 7, 290, 7, outline='red')
         self.music_speeder = self.music_canvas.create_rectangle(4, 4, 10, 11, width=1, fill='orangered', outline='black')
     
     def create_button(self):
