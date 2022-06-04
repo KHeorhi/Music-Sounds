@@ -1,6 +1,7 @@
 from tkinter import * 
 from PIL import Image, ImageTk
 from audio import sounds
+from speder import Speder
 
 
 class App(Tk):
@@ -36,6 +37,8 @@ class App(Tk):
         
         #download picture
         self.image = Image.open('image/label_music_image_256.png')
+        self.image_play = Image.open('image/play_button.png')
+        self.image_play_bt = ImageTk.PhotoImage(self.image_play)
         self.image_bk = ImageTk.PhotoImage(self.image)
         
         #add picture to top Frame
@@ -45,36 +48,25 @@ class App(Tk):
         #add buttons to bottom Frame
 
         #self.volume_button =  Button(self.frame_bottom, text='Volumes')
-        self.play_button = Button(self.frame_bottom, text='Play', command=sounds.play_sound)
+        self.play_button = Button(self.frame_bottom, image=self.image_play_bt, command=sounds.play_sound)
         self.stop_button = Button(self.frame_bottom, text='Stop', command=sounds.stop_sound)
 
         #self.volume_button.grid(column=1, row=2)
         self.play_button.grid(column=1, row=2)
         self.stop_button.grid(column=2, row=2)
 
-        #create volume_road and add to bottom Frame
-
-        self.volume_canvas = Canvas(self.frame_bottom, width=101, height=20)
-        self.volume_canvas.grid(column=4, row=2)
-        self.volume_road_behind = self.volume_canvas.create_rectangle(0, 10, 2, 10, outline='green')
-        self.volume_road_before = self.volume_canvas.create_rectangle(0, 10, 100, 10, outline='red')
-        self.volume_speedeer = self.volume_canvas.create_oval(2, 6.5, 9, 13.5, fill='orangered')
-        self.volume_canvas.bind('<Button-1>', self.speeder_move)
-
+        #create volume_road 
+        self.volume_road = Speder(self.frame_bottom, 101, 20, 4, 2,
+                          0, 10, 2, 10, 0, 10, 100, 10, 'green', 'red',
+                          2, 6.5, 9, 13.5, 'orangered'
+                          )
+        self.volume_road.move('<Button-1>')
+        
         #create music_road and add to bottom Frame
         
-        self.music_canvas = Canvas(self.frame_bottom, width=290, height=11)
-        self.music_canvas.grid(columnspan=5, row=1)
-        self.track_road_behind = self.music_canvas.create_rectangle(4, 7, 4, 7, outline='green')
-        self.track_road_before = self.music_canvas.create_rectangle(4, 7, 290, 7, outline='red')
-        self.music_speeder = self.music_canvas.create_rectangle(4, 4, 10, 11, width=1, fill='orangered', outline='black')
-    
-    def create_button(self):
-        pass
+        self.music_road = Speder(self.frame_top, 290, 11, 1, 4,
+                           4, 7, 4, 7, 4, 7, 290, 7, 'green', 'red',
+                           4, 4, 10, 11, 'orangered', form_speder='rectangle'
+                           )
+        self.music_road.move('<Button-1>')
 
-
-    def speeder_move(self, event):
-        coord_list = self.volume_canvas.coords(self.volume_speedeer)
-        if (coord_list[0] + coord_list[0]) / 2 <=100:
-            self.volume_canvas.coords(self.volume_speedeer, event.x-3.5, 6.5, event.x+3.5, 13.5)
-            print(self.volume_canvas.coords(self.volume_speedeer))
